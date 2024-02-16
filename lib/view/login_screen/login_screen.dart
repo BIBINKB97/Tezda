@@ -1,0 +1,113 @@
+
+import 'package:flutter/material.dart';
+import 'package:tezda/utils/common_widgets/custom_container.dart';
+import 'package:tezda/utils/common_widgets/text_style.dart';
+import 'package:tezda/utils/utils.dart';
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  bool isVisible = true;
+  final loginKey = GlobalKey<FormState>();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+             height: 300,
+              width: double.infinity,
+              child: Form(
+                key: loginKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      'Login',
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    TextFormField(
+                      controller: _usernameController,
+                      decoration: InputDecoration(
+                          label: Text('Username'),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15))),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "enter a valid username";
+                        }
+                        return null;
+                      },
+                    ),
+                   
+                    TextFormField(
+                      controller: _passwordController,
+                      obscureText: isVisible,
+                      decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isVisible = !isVisible;
+                              });
+                            },
+                            icon: isVisible == true
+                                ? Icon(Icons.visibility_off)
+                                : Icon(Icons.visibility),
+                          ),
+                          label: Text('Password'),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15))),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "enter a valid Password";
+                        }
+                        return null;
+                      },
+                    ),
+                   CustomContainer(
+                    height: 55,
+                    width: 200,
+                      borderRadius: 10,
+                    color: kLightGrey,
+                    child: Center(child: CustomText(text: "Submit",fs: 19,fw: FontWeight.w600,)),
+                   ) ,
+                  ],
+                ),
+              ),
+            ),
+          Container(
+          
+           height: 50,
+            margin:EdgeInsets.symmetric(horizontal: 20) ,
+              child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                        Text("Don't have an accout ?"),
+                         TextButton(onPressed: () {  },
+                         child: Text('Register Now'),)
+                      ],),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
