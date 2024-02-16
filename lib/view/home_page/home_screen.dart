@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tezda/model/user_model/user_model.dart';
 import 'package:tezda/utils/common_widgets/text_style.dart';
 import 'package:tezda/utils/utils.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+   final UserModel? user;
+  const HomePage({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {

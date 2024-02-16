@@ -1,8 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:tezda/controller/auth_service/auth_service.dart';
 import 'package:tezda/utils/common_widgets/custom_container.dart';
 import 'package:tezda/utils/common_widgets/text_style.dart';
 import 'package:tezda/utils/utils.dart';
+import 'package:tezda/view/home_page/home_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -52,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius: BorderRadius.circular(15))),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "enter a valid username";
+                          return "Enter a valid Username";
                         }
                         return null;
                       },
@@ -77,18 +79,28 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius: BorderRadius.circular(15))),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "enter a valid Password";
+                          return "Enter a valid Password";
                         }
                         return null;
                       },
                     ),
                    InkWell(
-                    onTap: () {
+                    onTap: ()async {
+                      //  Logic for Login
+                   if (loginKey.currentState!.validate())  {
+                          AuthService authService = AuthService();
+                          final user = await authService.login(
+                              _usernameController.text,
+                              _passwordController.text);
 
-                      // Login Logic
-                      // Navigator.of(context).pushNamed("/home");
-
-                      
+                            if (user != null) {
+                             // ignore: use_build_context_synchronously
+                             Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomePage(user:user)),);
+                          }
+                        }
                     },
                      child: CustomContainer(
                       height: 55,
