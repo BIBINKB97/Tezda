@@ -82,12 +82,22 @@ class _LoginPageState extends State<LoginPage> {
                         return null;
                       },
                     ),
-                   CustomContainer(
-                    height: 55,
-                    width: 200,
-                      borderRadius: 10,
-                    color: kLightGrey,
-                    child: Center(child: CustomText(text: "Submit",fs: 19,fw: FontWeight.w600,)),
+                   InkWell(
+                    onTap: () {
+
+                      // Login Logic
+                      Navigator.of(context).pushNamed("/home");
+                    },
+                     child: CustomContainer(
+                      height: 55,
+                      width: 200,
+                        borderRadius: 10,
+                        border: Border.all(
+                          width: 2,
+                          color: kblue),
+                      color: kgrey,
+                      child: Center(child: CustomText(text: "Submit",fs: 19,fw: FontWeight.w600,color: kwhite,)),
+                     ),
                    ) ,
                   ],
                 ),
@@ -100,9 +110,9 @@ class _LoginPageState extends State<LoginPage> {
               child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                        Text("Don't have an accout ?"),
+                       CustomText(text:"Don't have an account ?",),
                          TextButton(onPressed: () {  },
-                         child: Text('Register Now'),)
+                         child: CustomText(text:'Register Now',fs: 16,fw: FontWeight.w600,color:kblue ,),)
                       ],),
             )
           ],
