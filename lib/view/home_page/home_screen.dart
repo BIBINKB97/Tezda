@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tezda/utils/common_widgets/text_style.dart';
+import 'package:tezda/utils/utils.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -7,12 +8,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-appBar: AppBar(
-  centerTitle: true,
-  title: CustomText(text: 'All Products'),
-),
-
-body: ListView.separated(
+            appBar: AppBar(
+             centerTitle: true,
+                title: CustomText(text: 'All Products'),),
+                   body: ListView.separated(
                     separatorBuilder: (BuildContext context, int index) {
                       return Divider(
                         endIndent: 10,
@@ -21,36 +20,36 @@ body: ListView.separated(
                     },
                     itemCount: 15,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        leading: Container(
-                          width: 90,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
+                      return Container(
+                        margin: EdgeInsets.symmetric(horizontal: 15),
+                        height: 250,
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 130,
+                              width: 120,
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                  
                                   fit: BoxFit.fill,
                                   image: AssetImage("assets/images/dummy.jpg"))),
-                        ),
-                        title: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                             ' product brand',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w400),
+
                             ),
-                            Text(
-                          '    product title',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w600),
-                            ),
-                            Text(
-                             ' product description',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w400),
-                            ),
+                            kWidth20,
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Product name'),
+                                Text('product prize'),
+                                Text('description'),
+                              
+
+                              ],
+                            )
                           ],
                         ),
-                       
-                        
+                    
                       );
                     }) ,
     );
