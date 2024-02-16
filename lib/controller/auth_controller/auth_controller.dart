@@ -1,5 +1,6 @@
 import 'dart:convert';
-
+import 'dart:js';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tezda/api/api_key.dart';
@@ -35,8 +36,20 @@ class AuthController {
               
 
     } catch (error) {
-      print('error');
+           ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+            SnackBar(
+              content: Text('Invalid ID or Password'),
+            ),
+          );
     }
     return null;
   }
+    // Check if the user is already logged in
+  Future<bool> isLoggedIn() async {
+    SharedPreferences _pref = await SharedPreferences.getInstance();
+    final token = _pref.getString('token');
+    return token != null;
+  }
+
+
 }

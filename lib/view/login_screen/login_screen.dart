@@ -17,6 +17,25 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+
+
+ @override
+  void initState() {
+    super.initState();
+    checkLoginStatus();
+  }
+  // Check if the user is already logged in
+  void checkLoginStatus() async {
+    bool isLoggedIn = await AuthController().isLoggedIn();
+    if (isLoggedIn) {
+      // If user is already logged in, navigate to home screen
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.of(context).pushReplacementNamed('/home');
+      });
+    }
+  }
+
+// To dispose the both Controllers
   @override
   void dispose() {
     _usernameController.dispose();
@@ -90,9 +109,12 @@ class _LoginPageState extends State<LoginPage> {
                           final user = await authService.login(
                               _usernameController.text,
                               _passwordController.text);
-
                             if (user != null) {
-                             // ignore: use_build_context_synchronously
+                           // ignore: use_build_context_synchronously
+                           ScaffoldMessenger.of(context).showSnackBar(
+                       SnackBar(
+                        backgroundColor: kwhite,
+                        content: Center(child: CustomText(text:'Logged in successfully',fs: 18,color: kgreen,))));
                             Navigator.of(context).pushReplacementNamed('/home');
                           }
                         }
@@ -113,7 +135,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           Container(
-          
            height: 50,
             margin:EdgeInsets.symmetric(horizontal: 20) ,
               child: Row(

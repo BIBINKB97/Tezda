@@ -4,10 +4,12 @@ import 'package:tezda/controller/product_controller/product_controller.dart';
 import 'package:tezda/model/product_model/product_model.dart';
 import 'package:tezda/utils/common_widgets/text_style.dart';
 import 'package:tezda/utils/utils.dart';
+import 'package:tezda/view/home_page/product_details/product_details_screen.dart';
 
 class HomePage extends StatefulWidget {
+ 
    
-  const HomePage({super.key, });
+  const HomePage({super.key,  });
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -45,49 +47,56 @@ class _HomePageState extends State<HomePage> {
                         
                         itemBuilder: (context, index) {
                           final product =products![index];
-                          return Container(
-                            margin: EdgeInsets.symmetric(horizontal: 15),
-                            height: 230,
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 130,
-                                  width: 120,
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
-                                    image: DecorationImage(
-                                      
-                                      fit: BoxFit.fill,
-                                      image:NetworkImage(product.images![0]))),
-                       
-                                ),
-                                kWidth20,
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                   SizedBox(
-                                    width: 200, child: CustomText(text: product.title!,fs: 20,fw: FontWeight.w600,)),
-                                   SizedBox(
-                                    width: 200,
-                                    child: CustomText(text: product.description!,fs: 15,)),
-                                   Row(
-                                     children: [
-                                      StarRating(
-                                        rating: product.rating,
-                                        length: 5,
-                                      ),
-                                     CustomText(text: product.rating.toString(),fs: 15,),
-
-                                     ],
-                                   ),
-                                   CustomText(text: "${product.price.toString()} USD",fs: 15,fw: FontWeight.w600,),
-                                   CustomText(text: "${product.discountPercentage.toString()}% ▼",fs: 15,fw: FontWeight.w600,color: kgreen,),
-                                   CustomText(text: "Available Stock : ${product.stock.toString()} ",fs: 15,fw: FontWeight.w600,),
-                                  ],
-                                )
-                              ],
+                          return InkWell(
+                            onTap: () {
+                             Navigator.of(context).push(MaterialPageRoute(
+                              builder:(context) => ProductDetails( product:product),));
+                            },
+                            child: Container(
+                              margin: EdgeInsets.symmetric(horizontal: 15),
+                              height: 230,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    height: 130,
+                                    width: 120,
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
+                                      image: DecorationImage(
+                                        
+                                        fit: BoxFit.fill,
+                                        image:NetworkImage(product.images![0]))),
+                                                   
+                                  ),
+                                  kWidth20,
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                     SizedBox(
+                                      width: 200, child: CustomText(text: product.title!,fs: 20,fw: FontWeight.w600,)),
+                                     SizedBox(
+                                      width: 200,
+                                      child: CustomText(text: product.description!,fs: 15,)),
+                                     Row(
+                                       children: [
+                                        StarRating(
+                                          rating: product.rating,
+                                          length: 5,
+                                          color: kgreen,
+                                        ),
+                                       CustomText(text: product.rating.toString(),fs: 15,),
+                                       ],
+                                     ),
+                                     CustomText(text: "${product.discountPercentage.toString()}% ▼",fs: 15,fw: FontWeight.w600,color: kgreen,),
+                                     CustomText(text: "${product.price.toString()} USD",fs: 15,fw: FontWeight.w600,),
+                                     CustomText(text: "Available Stock : ${product.stock.toString()} ",fs: 15,fw: FontWeight.w500,),
+                            
+                                    ],
+                                  )
+                                ],
+                              ),
+                                                    
                             ),
-                        
                           );
                         },
                          itemCount: 11,
