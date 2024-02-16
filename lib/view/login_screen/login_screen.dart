@@ -1,10 +1,8 @@
-
 import 'package:flutter/material.dart';
-import 'package:tezda/controller/auth_service/auth_service.dart';
+import 'package:tezda/controller/auth_controller/auth_controller.dart';
 import 'package:tezda/utils/common_widgets/custom_container.dart';
 import 'package:tezda/utils/common_widgets/text_style.dart';
 import 'package:tezda/utils/utils.dart';
-import 'package:tezda/view/home_page/home_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -88,17 +86,14 @@ class _LoginPageState extends State<LoginPage> {
                     onTap: ()async {
                       //  Logic for Login
                    if (loginKey.currentState!.validate())  {
-                          AuthService authService = AuthService();
+                          AuthController authService = AuthController();
                           final user = await authService.login(
                               _usernameController.text,
                               _passwordController.text);
 
                             if (user != null) {
                              // ignore: use_build_context_synchronously
-                             Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomePage(user:user)),);
+                            Navigator.of(context).pushReplacementNamed('/home');
                           }
                         }
                     },

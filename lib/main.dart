@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tezda/view/home_page/home_screen.dart';
 import 'package:tezda/view/login_screen/login_screen.dart';
 import 'package:tezda/view/login_screen/registration_screen/registration_screen.dart';
 
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
        routes: {
         '/': (context) => LoginPage(),
+        '/home': (context) => HomePage(),
         '/register': (context) => RegistrationScreen(),
       },
     );

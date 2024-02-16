@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:tezda/model/user_model/user_model.dart';
+import 'package:star_rating/star_rating.dart';
+import 'package:tezda/controller/product_controller/product_controller.dart';
+import 'package:tezda/model/product_model/product_model.dart';
 import 'package:tezda/utils/common_widgets/text_style.dart';
 import 'package:tezda/utils/utils.dart';
 
-class HomePage extends StatelessWidget {
-   final UserModel? user;
-  const HomePage({super.key, required this.user});
+class HomePage extends StatefulWidget {
+   
+  const HomePage({super.key, });
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+ ProductController productController = ProductController();
+
+   @override
+  void initState() {
+    productController.getAllProducts();
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -13,47 +29,74 @@ class HomePage extends StatelessWidget {
             appBar: AppBar(
              centerTitle: true,
                 title: CustomText(text: 'All Products'),),
-                   body: ListView.separated(
-                    separatorBuilder: (BuildContext context, int index) {
-                      return Divider(
-                        endIndent: 10,
-                        indent: 10,
-                      );
-                    },
-                    itemCount: 15,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        height: 250,
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 130,
-                              width: 120,
-                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                  
-                                  fit: BoxFit.fill,
-                                  image: AssetImage("assets/images/dummy.jpg"))),
-
-                            ),
-                            kWidth20,
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                   body: FutureBuilder(
+                    future: productController.getAllProducts(),
+                     builder: (context, snapshot) {
+                      if(snapshot.hasData){
+                        final ProductModel productmodel = snapshot.data!;
+                        final products = productmodel.products;                    
+                       return ListView.separated(
+                        separatorBuilder: (BuildContext context, int index) {
+                          return Divider(
+                            endIndent: 10,
+                            indent: 10,
+                          );
+                        },
+                        
+                        itemBuilder: (context, index) {
+                          final product =products![index];
+                          return Container(
+                            margin: EdgeInsets.symmetric(horizontal: 15),
+                            height: 230,
+                            child: Row(
                               children: [
-                                Text('Product name'),
-                                Text('product prize'),
-                                Text('description'),
-                              
+                                Container(
+                                  height: 130,
+                                  width: 120,
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(
+                                      
+                                      fit: BoxFit.fill,
+                                      image:NetworkImage(product.images![0]))),
+                       
+                                ),
+                                kWidth20,
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                   SizedBox(
+                                    width: 200, child: CustomText(text: product.title!,fs: 20,fw: FontWeight.w600,)),
+                                   SizedBox(
+                                    width: 200,
+                                    child: CustomText(text: product.description!,fs: 15,)),
+                                   Row(
+                                     children: [
+                                      StarRating(
+                                        rating: product.rating,
+                                        length: 5,
+                                      ),
+                                     CustomText(text: product.rating.toString(),fs: 15,),
 
+                                     ],
+                                   ),
+                                   CustomText(text: "${product.price.toString()} USD",fs: 15,fw: FontWeight.w600,),
+                                   CustomText(text: "${product.discountPercentage.toString()}% ▼",fs: 15,fw: FontWeight.w600,color: kgreen,),
+                                   CustomText(text: "Available Stock : ${product.stock.toString()} ",fs: 15,fw: FontWeight.w600,),
+                                  ],
+                                )
                               ],
-                            )
-                          ],
-                        ),
-                    
-                      );
-                    }) ,
+                            ),
+                        
+                          );
+                        },
+                         itemCount: 11,
+                        
+                        );
+                     }
+                      return Center(child: CircularProgressIndicator());
+                     }
+                   ) ,
     );
 
   }

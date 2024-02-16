@@ -6,7 +6,7 @@ import 'package:tezda/api/api_key.dart';
 import 'package:tezda/model/user_model/user_model.dart';
 
 
-class AuthService {
+class AuthController {
   final client = http.Client();
 
 
