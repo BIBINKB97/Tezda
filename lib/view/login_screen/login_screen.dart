@@ -6,17 +6,14 @@ import 'package:tezda/utils/utils.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
-
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
-
 class _LoginPageState extends State<LoginPage> {
   bool isVisible = true;
   final loginKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
 
 
  @override
@@ -76,7 +73,6 @@ class _LoginPageState extends State<LoginPage> {
                         return null;
                       },
                     ),
-                   
                     TextFormField(
                       controller: _passwordController,
                       obscureText: isVisible,
@@ -138,11 +134,13 @@ class _LoginPageState extends State<LoginPage> {
            height: 50,
             margin:EdgeInsets.symmetric(horizontal: 20) ,
               child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                       CustomText(text:"Don't have an account ?",),
-                         TextButton(onPressed: () {  },
-                         child: CustomText(text:'Register Now',fs: 16,fw: FontWeight.w600,color:kblue ,),)
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                 children: [
+                 CustomText(text:"Don't have an account ?",),
+                 TextButton(onPressed: () { 
+                  Navigator.of(context).pushNamed('/register');
+                  },
+                 child: CustomText(text:'Register Now',fs: 16,fw: FontWeight.w600,color:kblue ,),)
                       ],),
             )
           ],

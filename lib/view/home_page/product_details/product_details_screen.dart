@@ -5,58 +5,72 @@ import 'package:tezda/utils/common_widgets/text_style.dart';
 import 'package:tezda/utils/utils.dart';
 import 'package:tezda/view/home_page/product_details/widgets/custom_icons.dart';
 
-class ProductDetails  extends StatefulWidget {
-    final Products product;
-  const ProductDetails({super.key, required this.product, });
+class ProductDetails
+    extends StatefulWidget {
+  final Products
+      product;
+  const ProductDetails({
+    super.key,
+    required this.product,
+  });
 
   @override
-  State<ProductDetails> createState() => _ProductDetailsState();
+  State<ProductDetails>
+      createState() =>
+          _ProductDetailsState();
 }
 
-class _ProductDetailsState extends State<ProductDetails> {
+class _ProductDetailsState
+    extends State<
+        ProductDetails> {
   @override
-  Widget build(BuildContext context) {
-
+  Widget build(
+      BuildContext
+          context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar:
+          AppBar(
         leading: IconButton(
-          onPressed: () {
-         Navigator.pop(context);},
-           icon: Icon(Icons.arrow_back_ios)),
-           title: CustomText(
-           text: widget.product.title.toString(),
-           fs: 24,
-           fw: FontWeight.w500,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back_ios)),
+        title: CustomText(
+          text: widget.product.title.toString(),
+          fs: 24,
+          fw: FontWeight.w500,
         ),
       ),
-      body: ListView(
+      body:
+          ListView(
         children: [
           Container(
             margin: EdgeInsets.symmetric(horizontal: 20),
             height: 400,
-            decoration: BoxDecoration(color: kAshLight, borderRadius: BorderRadius.circular(10)),
+            decoration: BoxDecoration(
+              color: kAshLight,
+              borderRadius: BorderRadius.circular(10),
+            ),
             child: Column(
               children: [
                 Container(
-                 height: 350,
-                 width: double.infinity,
-                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
-                fit: BoxFit.fill,
-                image:NetworkImage(
-                 
-                  
-                  widget.product.images![0])))),
+                  height: 350,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: NetworkImage(widget.product.images![0]),
+                    ),
+                  ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    CustomIconButton(icon: Icons.share_outlined, onPressed: () {}),
                     CustomIconButton(
-                        icon: Icons.share_outlined,
-                        onPressed: () {
-                         
-                        }),
-                    CustomIconButton(icon: Icons.favorite_border,
-                    onPressed: (){},
+                      icon: Icons.favorite_border,
+                      onPressed: () {},
                     ),
                   ],
                 ),
@@ -85,7 +99,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   size: 20,
                 ),
                 kWidth10,
-                CustomText(text: "1034", fs: 16),
+                CustomText(text: "842", fs: 16),
                 kWidth20,
                 Container(
                   decoration: BoxDecoration(color: kAshLight, borderRadius: BorderRadius.circular(30)),
@@ -98,7 +112,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                 ),
                 kWidth20,
-                CustomText(text: widget.product.rating.toString(), color: kgreen, fs: 16),
+                CustomText(text: widget.product.rating.toString(),
+                 color: kgreen,
+                  fs: 16),
               ],
             ),
           ),
@@ -107,7 +123,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             margin: EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children:  [
+              children: [
                 CustomText(
                   text: widget.product.brand.toString(),
                   fs: 19,
@@ -127,8 +143,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                       color: kgrey,
                     ),
                     kWidth5,
-        CustomText(text: "▼${widget.product.discountPercentage.toString()}% discount ",fs: 15,fw: FontWeight.w600,color: kgreen,),
-
+                    CustomText(
+                      text: "▼${widget.product.discountPercentage.toString()}% discount ",
+                      fs: 15,
+                      fw: FontWeight.w600,
+                      color: kgreen,
+                    ),
                   ],
                 ),
                 kHeight10,
@@ -143,17 +163,17 @@ class _ProductDetailsState extends State<ProductDetails> {
                     CustomText(
                       text: "Total Prize : ",
                       fs: 17,
-                      
                     ),
-                     CustomText(
+                    CustomText(
                       text: "${widget.product.price} USD only",
                       fs: 17,
                       fw: FontWeight.bold,
-                      
                     ),
                   ],
                 ),
-                kHeight20,
+                kHeight10,
+                CustomText(text: "Available Stock : ${widget.product.stock.toString()} ", fs: 15, color: kgrey),
+                kHeight10,
                 CustomText(
                   text: "Description",
                   fs: 19,
@@ -167,7 +187,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 ),
               ],
             ),
-          ), 
+          ),
           Align(
             alignment: Alignment(0.9, 1),
             child: TextButton(
