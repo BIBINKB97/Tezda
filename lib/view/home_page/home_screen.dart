@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
- ProductController productController = ProductController();
+  ProductController productController = ProductController();
 
    @override
   void initState() {
@@ -89,6 +89,7 @@ class _HomePageState extends State<HomePage> {
                                      ),
                                      CustomText(text: "${product.discountPercentage.toString()}% ▼",fs: 15,fw: FontWeight.w600,color: kgreen,),
                                      CustomText(text: "${product.price.toString()} USD",fs: 15,fw: FontWeight.w600,),
+                                     CustomText(text: "Available Stock : ${product.stock.toString()} ",fs: 15,fw: FontWeight.w500,),
                             
                                     ],
                                   )
