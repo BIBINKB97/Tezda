@@ -67,8 +67,11 @@ class _LoginPageState extends State<LoginPage> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15))),
                       validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Enter a valid Username";
+                        if (value == null || value.trim().isEmpty) {
+                          return "enter username";
+                        }
+                        if (value.trim().length < 8) {
+                          return "Minimum 8 characters required";
                         }
                         return null;
                       },
@@ -90,9 +93,12 @@ class _LoginPageState extends State<LoginPage> {
                           label: Text('Password'),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15))),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Enter a valid Password";
+                      validator:(value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return "Enter a password";
+                        }
+                        if (value.trim().length < 8) {
+                          return "Minimum 8 characters required";
                         }
                         return null;
                       },

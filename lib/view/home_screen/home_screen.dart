@@ -4,7 +4,7 @@ import 'package:tezda/controller/product_controller/product_controller.dart';
 import 'package:tezda/model/product_model/product_model.dart';
 import 'package:tezda/utils/common_widgets/text_style.dart';
 import 'package:tezda/utils/utils.dart';
-import 'package:tezda/view/home_page/product_details/product_details_screen.dart';
+import 'package:tezda/view/home_screen/product_details/product_details_screen.dart';
 
 class HomePage extends StatefulWidget {
  

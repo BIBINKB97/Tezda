@@ -3,7 +3,7 @@ import 'package:star_rating/star_rating.dart';
 import 'package:tezda/model/product_model/product_model.dart';
 import 'package:tezda/utils/common_widgets/text_style.dart';
 import 'package:tezda/utils/utils.dart';
-import 'package:tezda/view/home_page/product_details/widgets/custom_icons.dart';
+import 'package:tezda/view/home_screen/product_details/widgets/custom_icons.dart';
 
 class ProductDetails
     extends StatefulWidget {
@@ -70,7 +70,8 @@ class _ProductDetailsState
                     CustomIconButton(icon: Icons.share_outlined, onPressed: () {}),
                     CustomIconButton(
                       icon: Icons.favorite_border,
-                      onPressed: () {},
+                      onPressed: () {
+                      },
                     ),
                   ],
                 ),
